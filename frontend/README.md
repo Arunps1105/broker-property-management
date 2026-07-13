@@ -106,7 +106,7 @@ cp .env.example .env
 
 Example `.env`:
 ```env
-VITE_API_URL=http://localhost:8000
+VITE_API_URL=https://broker-property-management.onrender.com
 VITE_API_BASE_URL=/api
 ```
 
@@ -288,7 +288,7 @@ Create `.env.local` for local overrides:
 
 ```env
 # Backend API
-VITE_API_URL=http://localhost:8000
+VITE_API_URL=https://broker-property-management.onrender.com
 VITE_API_BASE_URL=/api
 
 # For production

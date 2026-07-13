@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.middleware.csrf import get_token
 from django.views.decorators.csrf import ensure_csrf_cookie
 from .models import UserProfile
 from .serializers import UserSerializer, UserDetailSerializer, LoginSerializer
@@ -38,8 +39,13 @@ def login_view(request):
 @permission_classes([AllowAny])
 @ensure_csrf_cookie
 def csrf(request):
-    """Set the CSRF cookie required by session-authenticated API writes."""
-    return Response({'detail': 'CSRF cookie set.'})
+    """Set and return the CSRF token required by session-authenticated API writes."""
+    return Response({
+        'detail': 'CSRF cookie set.',
+        # A Vercel page cannot read a host-only cookie set by Render. Returning
+        # this masked token allows credentialed cross-origin API writes.
+        'csrfToken': get_token(request),
+    })
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
