@@ -25,6 +25,8 @@ services:
         sync: false
       - key: CLOUDINARY_URL
         sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
 
 databases:
   - name: broker-property-db
