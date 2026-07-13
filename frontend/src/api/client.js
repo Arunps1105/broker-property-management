@@ -1,11 +1,10 @@
 import axios from 'axios'
 
-// Keep local API requests same-origin so the browser cannot upgrade the backend
-// host through a cached HSTS rule. Vite proxies /api to HTTP on port 8000.
-
+// Development stays same-origin through Vite's proxy; production uses Render.
+const apiOrigin = import.meta.env.DEV ? '' : (import.meta.env.VITE_API_URL || '')
 
 const client = axios.create({
-  baseURL: '/api',
+  baseURL: `${apiOrigin}/api`,
   withCredentials: true,
   withXSRFToken: true,
   xsrfCookieName: 'csrftoken',

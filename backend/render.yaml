@@ -3,27 +3,29 @@ services:
     name: broker-property-api
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt && python manage.py migrate
-    startCommand: gunicorn config.wsgi:application
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate --noinput
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 3 --timeout 120
+    healthCheckPath: /api/auth/csrf/
     envVars:
-      - key: DATABASE_URL
-        scope: build
-        value: ${DATABASE_URL}
-      - key: SECRET_KEY
-        scope: build
-        value: ${SECRET_KEY}
-      - key: DEBUG
-        value: "False"
       - key: DJANGO_ENV
         value: production
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: broker-property-db
+          property: connectionString
       - key: ALLOWED_HOSTS
-        value: "broker-property-api.onrender.com"
-      - key: CLOUDINARY_CLOUD_NAME
-        scope: build
-        value: ${CLOUDINARY_CLOUD_NAME}
-      - key: CLOUDINARY_API_KEY
-        scope: build
-        value: ${CLOUDINARY_API_KEY}
-      - key: CLOUDINARY_API_SECRET
-        scope: build
-        value: ${CLOUDINARY_API_SECRET}
+        value: broker-property-api.onrender.com
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false
+      - key: CLOUDINARY_URL
+        sync: false
+
+databases:
+  - name: broker-property-db
+    plan: free

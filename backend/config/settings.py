@@ -1,15 +1,19 @@
 import os
 from pathlib import Path
 from datetime import timedelta
+from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dev-key-change-in-production')
-
-DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 IS_PRODUCTION = os.environ.get('DJANGO_ENV', '').lower() == 'production'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dev-key-change-in-production')
+DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+if IS_PRODUCTION and SECRET_KEY == 'django-insecure-dev-key-change-in-production':
+    raise ImproperlyConfigured('SECRET_KEY must be set in production.')
+
+_development_hosts = 'localhost,127.0.0.1' if not IS_PRODUCTION else ''
+ALLOWED_HOSTS = [host.strip() for host in os.environ.get('ALLOWED_HOSTS', _development_hosts).split(',') if host.strip()]
 
 INSTALLED_APPS = [
     # 'daphne',
@@ -126,26 +130,18 @@ REST_FRAMEWORK = {
 }
 
 # CORS Configuration
-CORS_ALLOWED_ORIGINS = os.environ.get(
-    'CORS_ALLOWED_ORIGINS',
-    'http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000,http://127.0.0.1:3000'
-).split(',')
+_development_origins = 'http://localhost:5173,http://127.0.0.1:5173' if not IS_PRODUCTION else ''
+CORS_ALLOWED_ORIGINS = [origin.strip() for origin in os.environ.get('CORS_ALLOWED_ORIGINS', _development_origins).split(',') if origin.strip()]
 
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = os.environ.get(
-    'CSRF_TRUSTED_ORIGINS',
-    ','.join(CORS_ALLOWED_ORIGINS),
-).split(',')
+CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in os.environ.get('CSRF_TRUSTED_ORIGINS', ','.join(CORS_ALLOWED_ORIGINS)).split(',') if origin.strip()]
 
 # Cloudinary Configuration
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
-}
-
-if os.environ.get('CLOUDINARY_CLOUD_NAME'):
+CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
+if CLOUDINARY_URL:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+elif IS_PRODUCTION:
+    raise ImproperlyConfigured('CLOUDINARY_URL must be set in production.')
 
 # Session Configuration
 SESSION_COOKIE_SECURE = IS_PRODUCTION
