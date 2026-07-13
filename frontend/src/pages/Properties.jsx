@@ -98,7 +98,7 @@ export default function Properties() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 space-y-6"
+      className="space-y-6 p-4 sm:p-6"
     >
       {/* Header */}
       <div>
@@ -121,12 +121,16 @@ export default function Properties() {
         </div>
 
         {/* Filters Toggle */}
-        <button
-          onClick={() => setShowFilters(!showFilters)}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition-all"
-        >
-          <FiFilter size={18} />
-          <span>Filters {isFiltered && '(Active)'}</span>
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setShowFilters(!showFilters)}
+            className="flex items-center gap-2 rounded-lg bg-slate-100 px-4 py-2 font-medium text-slate-700 transition-all hover:bg-slate-200"
+            aria-expanded={showFilters}
+          >
+            <FiFilter size={18} />
+            <span>Filters {isFiltered && '(Active)'}</span>
+          </button>
           {isFiltered && (
             <button
               onClick={(e) => {
@@ -139,7 +143,7 @@ export default function Properties() {
               Clear
             </button>
           )}
-        </button>
+        </div>
 
         {/* Filters Panel */}
         {showFilters && (
@@ -202,11 +206,11 @@ export default function Properties() {
         )}
 
         {/* Sorting */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <select
             value={sorting}
             onChange={(e) => setSorting(e.target.value)}
-            className="input text-sm max-w-xs"
+            className="input max-w-full text-sm sm:max-w-xs"
           >
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>

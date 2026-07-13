@@ -208,7 +208,7 @@ export default function AddProperty() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 max-w-5xl mx-auto"
+      className="mx-auto max-w-5xl p-4 sm:p-6"
     >
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-slate-900">Add New Property</h1>
@@ -612,7 +612,7 @@ export default function AddProperty() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.65 }}
-          className="flex gap-4"
+          className="flex flex-col gap-3 sm:flex-row sm:gap-4"
         >
           <button
             type="submit"

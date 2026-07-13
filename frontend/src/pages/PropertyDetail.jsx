@@ -44,7 +44,7 @@ export default function PropertyDetail() {
   return <main className="max-w-7xl mx-auto p-4 sm:p-6 space-y-6">
     <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <button onClick={() => navigate('/properties')} className="inline-flex items-center gap-2 text-brass-300 hover:text-brass-200"><FiArrowLeft /> All properties</button>
-      <div className="flex gap-2"><button onClick={() => navigate(`/edit-property/${id}`)} className="btn-secondary inline-flex items-center gap-2"><FiEdit2 /> Edit</button><button onClick={remove} className="inline-flex items-center gap-2 rounded-lg bg-rose-500/15 px-4 py-2 text-rose-300 hover:bg-rose-500/25"><FiTrash2 /> Delete</button></div>
+      <div className="flex flex-col gap-2 sm:flex-row"><button onClick={() => navigate(`/edit-property/${id}`)} className="btn-secondary inline-flex items-center gap-2"><FiEdit2 /> Edit</button><button onClick={remove} className="inline-flex items-center gap-2 rounded-lg bg-rose-500/15 px-4 py-2 text-rose-300 hover:bg-rose-500/25"><FiTrash2 /> Delete</button></div>
     </header>
 
     <section className="rounded-2xl border border-ink-700 bg-ink-900 p-5 sm:p-8">
@@ -56,7 +56,7 @@ export default function PropertyDetail() {
     <div className="grid gap-6 lg:grid-cols-3">
       <section className="lg:col-span-2 rounded-2xl border border-ink-700 bg-ink-900 overflow-hidden">
         <div className="aspect-[16/10] bg-ink-800">{image ? <img src={image} alt={property.place} className="h-full w-full object-cover" /> : <div className="grid h-full place-items-center text-paper-dim">No property images</div>}</div>
-        {images.length > 1 && <div className="flex gap-3 overflow-x-auto p-4">{images.map((item, index) => <button key={item.id} onClick={() => setActiveImage(index)} className={`h-16 w-20 shrink-0 overflow-hidden rounded-lg border-2 ${index === activeImage ? 'border-brass-400' : 'border-transparent'}`}><img src={item.image} alt="Property thumbnail" className="h-full w-full object-cover" /></button>)}</div>}
+        {images.length > 1 && <div className="flex flex-wrap gap-3 p-4">{images.map((item, index) => <button key={item.id} onClick={() => setActiveImage(index)} className={`h-16 w-20 shrink-0 overflow-hidden rounded-lg border-2 ${index === activeImage ? 'border-brass-400' : 'border-transparent'}`}><img src={item.image} alt="Property thumbnail" className="h-full w-full object-cover" /></button>)}</div>}
       </section>
       <aside className="space-y-4">
         <section className="rounded-2xl border border-brass-400/30 bg-ink-900 p-6"><p className="text-sm uppercase tracking-wider text-paper-dim">Price</p><p className="mt-2 font-display text-3xl text-brass-300">{money(property.price)}</p></section>

@@ -24,7 +24,9 @@ export default function Sidebar() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-50 lg:hidden p-2 rounded-md bg-ink-900 border border-ink-700 text-paper shadow-panel"
+        aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={isOpen}
+        className="fixed left-4 top-4 z-50 rounded-md border border-ink-700 bg-ink-900 p-2 text-paper shadow-panel lg:hidden"
       >
         {isOpen ? <FiX size={22} /> : <FiMenu size={22} />}
       </button>
@@ -42,7 +44,11 @@ export default function Sidebar() {
         )}
       </AnimatePresence>
 
-      <aside className="fixed lg:relative left-0 top-0 h-screen w-72 bg-ink-950 blueprint-grid border-r border-ink-800 p-6 flex flex-col z-40 lg:translate-x-0 lg:z-10">
+      <aside
+        className={`fixed left-0 top-0 z-40 flex h-screen w-72 flex-col border-r border-ink-800 bg-ink-950 p-6 blueprint-grid transition-transform duration-300 ease-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } lg:relative lg:z-10 lg:translate-x-0`}
+      >
         {/* Logo */}
         <div className="mb-10">
           <div className="inline-flex items-center justify-center h-11 w-11 rounded-md border-2 border-brass-400/60 bg-ink-900 mb-3">

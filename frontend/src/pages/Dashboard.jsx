@@ -92,10 +92,10 @@ export default function Dashboard() {
       variants={container}
       initial="hidden"
       animate="show"
-      className="p-6 space-y-8"
+      className="space-y-6 p-4 sm:space-y-8 sm:p-6"
     >
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
         <motion.div variants={item}>
           <StatCard icon={FiHome} label="Total Properties" value={stats.total_properties} />
         </motion.div>
@@ -115,7 +115,7 @@ export default function Dashboard() {
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
         {/* Properties by Place */}
         <motion.div variants={item} className="lg:col-span-2 card">
           <div className="flex items-baseline justify-between mb-6">
@@ -212,8 +212,8 @@ export default function Dashboard() {
 
 function LoadingDashboard() {
   return (
-    <div className="p-6 space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="space-y-6 p-4 sm:space-y-8 sm:p-6">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
         {[...Array(4)].map((_, i) => (
           <div key={i} className="h-24 skeleton" />
         ))}
