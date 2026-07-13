@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(217, 166, 76, 0.35);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 166, 76, 0.55);
+}
+
+* {
+  @apply transition-colors duration-200;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  @apply bg-ink-950 text-paper;
+}
+
+@layer components {
+  /* Base dark panel — the ledger sheet. Replaces the old white "glass" look everywhere it's used. */
+  .glass {
+    @apply bg-ink-900/90 backdrop-blur-md border border-brass-400/10;
+  }
+
+  .glass-lg {
+    @apply glass shadow-panel-lg;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 rounded-md bg-brass-500 hover:bg-brass-400 text-ink-950 font-semibold tracking-wide transition-all duration-200 shadow-brass hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-md border border-brass-400/40 text-brass-300 font-medium hover:bg-brass-400/10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-soft {
+    @apply px-4 py-2 rounded-md bg-ink-800 text-paper-dim hover:bg-ink-700 hover:text-paper font-medium transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-ink-900 border border-ink-700/60 rounded-2xl p-6 shadow-panel hover:border-brass-400/30 hover:shadow-panel-lg transition-all duration-300;
+  }
+
+  .input {
+    @apply w-full px-4 py-3 rounded-md border border-ink-700 bg-ink-800 text-paper placeholder-paper-dim/60 focus:border-brass-400 focus:ring-1 focus:ring-brass-400/40 focus:outline-none transition-all duration-200;
+  }
+
+  .badge {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-mono font-medium tracking-wide;
+  }
+
+  .badge-primary {
+    @apply badge bg-brass-400/15 text-brass-300 border border-brass-400/30;
+  }
+
+  .badge-success {
+    @apply badge bg-sage-500/15 text-sage-300 border border-sage-500/30;
+  }
+
+  .badge-warning {
+    @apply badge bg-brass-400/15 text-brass-300 border border-brass-400/30;
+  }
+
+  .badge-danger {
+    @apply badge bg-rose-500/15 text-rose-300 border border-rose-500/30;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-brass-300 via-brass-400 to-sage-400 bg-clip-text text-transparent;
+  }
+
+  /* Signature texture: faint architectural grid, used on the sidebar and page shell */
+  .blueprint-grid {
+    background-image: linear-gradient(rgba(217, 166, 76, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(217, 166, 76, 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* A rotated, ink-stamped label — used for property status instead of a soft pill */
+  .stamp {
+    @apply inline-flex items-center gap-1 -rotate-6 rounded-sm border-2 px-2.5 py-1 text-[10px] font-mono font-bold uppercase tracking-widest backdrop-blur-sm animate-stamp-in;
+  }
+
+  .stamp-available {
+    @apply stamp border-sage-400 text-sage-300 bg-ink-950/70;
+  }
+
+  .stamp-sold {
+    @apply stamp border-rose-400 text-rose-300 bg-ink-950/70;
+  }
+
+  .stamp-default {
+    @apply stamp border-paper-dim text-paper-dim bg-ink-950/70;
+  }
+}
+
+/* Loading Skeleton */
+.skeleton {
+  @apply animate-pulse bg-ink-800 rounded-lg;
+}
+
+/* Toast Styles */
+.toast-container {
+  z-index: 9999;
+}
+
+/* Page transitions */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

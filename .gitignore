@@ -1,0 +1,161 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production.local
+
+# Backend
+backend/venv/
+backend/env/
+backend/__pycache__/
+backend/*.py[cod]
+backend/*$py.class
+backend/*.so
+backend/.Python
+backend/build/
+backend/develop-eggs/
+backend/dist/
+backend/downloads/
+backend/eggs/
+backend/.eggs/
+backend/lib/
+backend/lib64/
+backend/parts/
+backend/sdist/
+backend/var/
+backend/wheels/
+backend/pip-wheel-metadata/
+backend/share/python-wheels/
+backend/*.egg-info/
+backend/.installed.cfg
+backend/*.egg
+backend/MANIFEST
+backend/staticfiles/
+backend/db.sqlite3
+backend/.vscode/
+backend/.idea/
+backend/*.db
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.parcel-cache
+frontend/.cache
+frontend/coverage/
+frontend/.next
+frontend/out
+frontend/*.tsbuildinfo
+frontend/.eslintcache
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.vscode/
+frontend/.idea/
+frontend/.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+.tmp/
+
+# Media files (except for version control)
+media/
+!media/.gitkeep
+
+# Static files
+staticfiles/
+
+# Package manager lock files (optional, uncomment to ignore)
+# package-lock.json
+# yarn.lock
+
+# Compiled Python files
+*.pyc
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage
+.coverage
+.hypothesis/
+.pytest_cache/
+htmlcov/
+
+# Celery
+celerybeat-schedule
+
+# Distribution / packaging
+.Python
+bin/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+
+# Virtual environments
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode
+.idea
+*.iml
+
+# Production build files (optional)
+# frontend/dist/
+# backend/staticfiles/
